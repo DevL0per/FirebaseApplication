@@ -9,21 +9,25 @@
 /* Begin PBXBuildFile section */
 		F648043B2354D85D00F9678B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F648043A2354D85D00F9678B /* AppDelegate.swift */; };
 		F648043D2354D85D00F9678B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F648043C2354D85D00F9678B /* SceneDelegate.swift */; };
-		F648043F2354D85D00F9678B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F648043E2354D85D00F9678B /* ViewController.swift */; };
 		F64804422354D85D00F9678B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F64804402354D85D00F9678B /* Main.storyboard */; };
 		F64804442354D85F00F9678B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F64804432354D85F00F9678B /* Assets.xcassets */; };
 		F64804472354D85F00F9678B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F64804452354D85F00F9678B /* LaunchScreen.storyboard */; };
+		F648044F2354D8A100F9678B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F648044E2354D8A100F9678B /* RegistrationViewController.swift */; };
+		F64804532354E44F00F9678B /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64804522354E44F00F9678B /* ContactsViewController.swift */; };
+		F64804552354E6A900F9678B /* CreateContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64804542354E6A900F9678B /* CreateContactViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F64804372354D85D00F9678B /* FirebaseApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirebaseApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F648043A2354D85D00F9678B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F648043C2354D85D00F9678B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F648043E2354D85D00F9678B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F64804412354D85D00F9678B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F64804432354D85F00F9678B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F64804462354D85F00F9678B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F64804482354D85F00F9678B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F648044E2354D8A100F9678B /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		F64804522354E44F00F9678B /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
+		F64804542354E6A900F9678B /* CreateContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateContactViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,11 +62,13 @@
 			children = (
 				F648043A2354D85D00F9678B /* AppDelegate.swift */,
 				F648043C2354D85D00F9678B /* SceneDelegate.swift */,
-				F648043E2354D85D00F9678B /* ViewController.swift */,
 				F64804402354D85D00F9678B /* Main.storyboard */,
 				F64804432354D85F00F9678B /* Assets.xcassets */,
 				F64804452354D85F00F9678B /* LaunchScreen.storyboard */,
 				F64804482354D85F00F9678B /* Info.plist */,
+				F648044E2354D8A100F9678B /* RegistrationViewController.swift */,
+				F64804522354E44F00F9678B /* ContactsViewController.swift */,
+				F64804542354E6A900F9678B /* CreateContactViewController.swift */,
 			);
 			path = FirebaseApplication;
 			sourceTree = "<group>";
@@ -138,7 +144,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F648043F2354D85D00F9678B /* ViewController.swift in Sources */,
+				F648044F2354D8A100F9678B /* RegistrationViewController.swift in Sources */,
+				F64804532354E44F00F9678B /* ContactsViewController.swift in Sources */,
+				F64804552354E6A900F9678B /* CreateContactViewController.swift in Sources */,
 				F648043B2354D85D00F9678B /* AppDelegate.swift in Sources */,
 				F648043D2354D85D00F9678B /* SceneDelegate.swift in Sources */,
 			);

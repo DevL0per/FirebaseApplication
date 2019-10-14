@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CreateContactViewController.swift
 //  FirebaseApplication
 //
 //  Created by Роман Важник on 14/10/2019.
@@ -8,13 +8,12 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CreateContactViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         // Do any additional setup after loading the view.
     }
 
-
 }
-
