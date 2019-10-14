@@ -8,11 +8,13 @@
 
 import UIKit
 
-class CreateContactViewController: UIViewController, UIAdaptivePresentationControllerDelegate {
+class CreateContactViewController: UIViewController {
 
     private var navigationBar: UINavigationBar!
     private var firstNameTextField = UITextField()
     private var secondNameTextField  = UITextField()
+    
+    private var doneButton: UIBarButtonItem!
     
     private var stackView: UIStackView!
     
@@ -23,8 +25,15 @@ class CreateContactViewController: UIViewController, UIAdaptivePresentationContr
         configureStackView()
         presentationController?.delegate = self
         
+        firstNameTextField.addTarget(self, action: #selector(firstNameTextFieldTarget), for: .editingChanged)
+        
     }
     
+    @objc private func firstNameTextFieldTarget() {
+        guard let text = firstNameTextField.text else { return }
+        isModalInPresentation = text.isEmpty ? false : true
+        doneButton.isEnabled = text.isEmpty ? false : true
+    }
     
     private func configureStackView() {
         
@@ -69,17 +78,46 @@ class CreateContactViewController: UIViewController, UIAdaptivePresentationContr
     private func configureNavigationBar() {
         navigationBar = UINavigationBar()
         view.addSubview(navigationBar)
-        let titleItem = UINavigationItem(title: "New Contact")
-        navigationBar.setItems([titleItem], animated: false)
+        let navigationItem = UINavigationItem(title: "New Contact")
+        doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonPressed))
+        navigationItem.rightBarButtonItem = doneButton
+        navigationBar.setItems([navigationItem], animated: false)
         
         navigationBar.translatesAutoresizingMaskIntoConstraints = false
         navigationBar.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         navigationBar.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         navigationBar.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        
+        
     }
     
-    func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
-        print(#function)
+    @objc private func doneButtonPressed() {
+        
+    }
+    
+    private func showAlert() {
+        let alert = UIAlertController(title: "Choose what to do",
+                                      message: nil,
+                                      preferredStyle: .actionSheet)
+        let saveAction = UIAlertAction(title: "Save Contact",
+                                       style: .default,
+                                       handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel",
+                                         style: .cancel,
+                                         handler: nil)
+        let exitAcntion = UIAlertAction(title: "Exit without saving",
+                                        style: .destructive,
+                                        handler: nil)
+        alert.addAction(saveAction)
+        alert.addAction(cancelAction)
+        alert.addAction(exitAcntion)
+        present(alert, animated: true)
     }
 
+}
+
+extension CreateContactViewController: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
+        showAlert()
+    }
 }
