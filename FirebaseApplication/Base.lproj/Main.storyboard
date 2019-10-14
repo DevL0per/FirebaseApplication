@@ -37,7 +37,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="rNu-ej-Jgt"/>
                     <connections>
-                        <segue destination="QPI-K4-YXd" kind="show" identifier="addContact" id="vQz-EA-nba"/>
+                        <segue destination="QPI-K4-YXd" kind="presentation" identifier="addContact" modalPresentationStyle="pageSheet" id="vQz-EA-nba"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ULp-Tx-Tj9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -49,7 +49,7 @@
             <objects>
                 <viewController modalPresentationStyle="pageSheet" id="QPI-K4-YXd" customClass="CreateContactViewController" customModule="FirebaseApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0Kl-Pr-pEz">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="T0G-01-enk"/>
