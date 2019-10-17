@@ -11,7 +11,10 @@ import Firebase
 
 class LoginViewController: UIViewController {
     
+    private var ref: DatabaseReference!
+    
     private var mainStackView: UIStackView!
+    private let minimumSynvolsInPassword = 8
     
     private var loginTextField = UITextField()
     private var passwordTextField = UITextField()
@@ -29,9 +32,10 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ref = Database.database().reference(withPath: "users")
+        
         view.backgroundColor = .white
         
-        //Configure textFields
         configureTextField(textField: loginTextField)
         configureTextField(textField: passwordTextField)
         
@@ -39,7 +43,22 @@ class LoginViewController: UIViewController {
         configureRegistrationButton()
         
         configureStackView()
-        
+        // if user exist - perform segue
+        loginInLastUser()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        loginTextField.text = ""
+        passwordTextField.text = ""
+    }
+    
+    private func loginInLastUser() {
+        Auth.auth().addStateDidChangeListener { (auth, user) in
+            if user != nil {
+                self.performSegue(withIdentifier: "noteSegue", sender: nil)
+            }
+        }
     }
     
     //MARK: - Configures
@@ -91,11 +110,27 @@ class LoginViewController: UIViewController {
     }
     
     @objc private func RegistrationButtonTarget() {
-        
+        guard let email = loginTextField.text, let password = passwordTextField.text,
+            !email.isEmpty, !password.isEmpty else {
+                showWarningLabel(text: "incorrect data")
+                return
+        }
+        if password.count < minimumSynvolsInPassword {
+            showWarningLabel(text: "password too short")
+            return
+        }
+        Auth.auth().createUser(withEmail: email, password: password) { [weak self] (user, error) in
+            guard error == nil, user != nil else  {
+                self?.showWarningLabel(text: "user is not created")
+                return
+            }
+            let userRef = (self?.ref.child((user?.user.uid)!))!
+            userRef.setValue(["email": user?.user.email])
+            self?.performSegue(withIdentifier: "noteSegue", sender: nil)
+        }
     }
     
     private func configureTextField(textField: UITextField) {
-        //textField.layer.borderWidth = 1
         textField.layer.cornerRadius = 3
         textField.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.937254902, alpha: 1)
         textField.leftViewMode = .always

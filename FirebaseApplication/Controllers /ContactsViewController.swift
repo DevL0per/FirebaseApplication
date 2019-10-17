@@ -7,16 +7,27 @@
 //
 
 import UIKit
+import Firebase
 
 class ContactsViewController: UIViewController {
     
     var contactsTableView: UITableView!
+    private var user: User!
+    private var ref: DatabaseReference!
+    private var contacts: [Contact] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureTableView()
         configureNavigationBar()
+        createUser()
+    }
+    
+    private func createUser() {
+        guard let currentUser = Auth.auth().currentUser else { return }
+        user = User(user: currentUser)
+        ref = Database.database().reference(withPath: "users").child(user.userId).child("contacts")
     }
     
     private func configureTableView() {
@@ -34,13 +45,35 @@ class ContactsViewController: UIViewController {
     }
     
     private func configureNavigationBar() {
+        
+        title = "Contacts"
+        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.7450980544, green: 0.2126455816, blue: 0.1617561306, alpha: 1)
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.tintColor = .white
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonPressed))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "sign out", style: .plain, target: self, action: #selector(signOut))
+    }
+    
+    @objc private func signOut() {
+        do {
+            try Auth.auth().signOut()
+        } catch let error {
+            print(error)
+        }
+         dismiss(animated: true, completion: nil)
     }
     
     @objc private func addButtonPressed() {
         performSegue(withIdentifier: "addContact", sender: nil)
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination as! CreateContactViewController
+        vc.user = user
+        vc.ref = ref
+    }
+    
 }
 
 

@@ -10,12 +10,13 @@
 		1252E3ED7F563C62B1CAEAB5 /* Pods_FirebaseApplication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5616B6CFCE0F4FEB8C880798 /* Pods_FirebaseApplication.framework */; };
 		F62EF351235665E2002F3FC6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F62EF350235665E2002F3FC6 /* GoogleService-Info.plist */; };
 		F62EF3532357A990002F3FC6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62EF3522357A990002F3FC6 /* LoginViewController.swift */; };
+		F62EF35523586126002F3FC6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62EF35423586126002F3FC6 /* User.swift */; };
+		F62EF358235861AD002F3FC6 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62EF357235861AD002F3FC6 /* Contact.swift */; };
 		F648043B2354D85D00F9678B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F648043A2354D85D00F9678B /* AppDelegate.swift */; };
 		F648043D2354D85D00F9678B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F648043C2354D85D00F9678B /* SceneDelegate.swift */; };
 		F64804422354D85D00F9678B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F64804402354D85D00F9678B /* Main.storyboard */; };
 		F64804442354D85F00F9678B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F64804432354D85F00F9678B /* Assets.xcassets */; };
 		F64804472354D85F00F9678B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F64804452354D85F00F9678B /* LaunchScreen.storyboard */; };
-		F648044F2354D8A100F9678B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F648044E2354D8A100F9678B /* RegistrationViewController.swift */; };
 		F64804532354E44F00F9678B /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64804522354E44F00F9678B /* ContactsViewController.swift */; };
 		F64804552354E6A900F9678B /* CreateContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64804542354E6A900F9678B /* CreateContactViewController.swift */; };
 /* End PBXBuildFile section */
@@ -26,6 +27,8 @@
 		7FD7FA3FB561E41DB99C4705 /* Pods-FirebaseApplication.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseApplication.release.xcconfig"; path = "Target Support Files/Pods-FirebaseApplication/Pods-FirebaseApplication.release.xcconfig"; sourceTree = "<group>"; };
 		F62EF350235665E2002F3FC6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F62EF3522357A990002F3FC6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		F62EF35423586126002F3FC6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F62EF357235861AD002F3FC6 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		F64804372354D85D00F9678B /* FirebaseApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirebaseApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F648043A2354D85D00F9678B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F648043C2354D85D00F9678B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -33,7 +36,6 @@
 		F64804432354D85F00F9678B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F64804462354D85F00F9678B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F64804482354D85F00F9678B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F648044E2354D8A100F9678B /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		F64804522354E44F00F9678B /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		F64804542354E6A900F9678B /* CreateContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateContactViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,7 +72,6 @@
 		F62EF34A23566041002F3FC6 /* Controllers  */ = {
 			isa = PBXGroup;
 			children = (
-				F648044E2354D8A100F9678B /* RegistrationViewController.swift */,
 				F64804522354E44F00F9678B /* ContactsViewController.swift */,
 				F64804542354E6A900F9678B /* CreateContactViewController.swift */,
 				F62EF3522357A990002F3FC6 /* LoginViewController.swift */,
@@ -90,6 +91,15 @@
 				F62EF350235665E2002F3FC6 /* GoogleService-Info.plist */,
 			);
 			path = "Supporting files ";
+			sourceTree = "<group>";
+		};
+		F62EF35623586188002F3FC6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F62EF35423586126002F3FC6 /* User.swift */,
+				F62EF357235861AD002F3FC6 /* Contact.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		F648042E2354D85D00F9678B = {
@@ -115,6 +125,7 @@
 			children = (
 				F62EF34B23566063002F3FC6 /* Supporting files  */,
 				F62EF34A23566041002F3FC6 /* Controllers  */,
+				F62EF35623586188002F3FC6 /* Model */,
 			);
 			path = FirebaseApplication;
 			sourceTree = "<group>";
@@ -236,11 +247,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				F62EF3532357A990002F3FC6 /* LoginViewController.swift in Sources */,
-				F648044F2354D8A100F9678B /* RegistrationViewController.swift in Sources */,
 				F64804532354E44F00F9678B /* ContactsViewController.swift in Sources */,
+				F62EF35523586126002F3FC6 /* User.swift in Sources */,
 				F64804552354E6A900F9678B /* CreateContactViewController.swift in Sources */,
 				F648043B2354D85D00F9678B /* AppDelegate.swift in Sources */,
 				F648043D2354D85D00F9678B /* SceneDelegate.swift in Sources */,
+				F62EF358235861AD002F3FC6 /* Contact.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

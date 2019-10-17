@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import Firebase
 
 class CreateContactViewController: UIViewController {
 
+    var user: User!
+    var ref: DatabaseReference!
+    
     private var navigationBar: UINavigationBar!
     private var firstNameTextField = UITextField()
     private var secondNameTextField  = UITextField()
@@ -25,14 +29,16 @@ class CreateContactViewController: UIViewController {
         configureStackView()
         presentationController?.delegate = self
         
-        firstNameTextField.addTarget(self, action: #selector(firstNameTextFieldTarget), for: .editingChanged)
+        secondNameTextField.addTarget(self, action: #selector(checkTextFields), for: .editingChanged)
+        firstNameTextField.addTarget(self, action: #selector(checkTextFields), for: .editingChanged)
         
     }
     
-    @objc private func firstNameTextFieldTarget() {
-        guard let text = firstNameTextField.text else { return }
-        isModalInPresentation = text.isEmpty ? false : true
-        doneButton.isEnabled = text.isEmpty ? false : true
+    @objc private func checkTextFields() {
+        guard let name = firstNameTextField.text, let surname = secondNameTextField.text
+            else { return }
+        isModalInPresentation = (!name.isEmpty && !surname.isEmpty) ? true : false
+        doneButton.isEnabled = (!name.isEmpty && !surname.isEmpty) ? true : false
     }
     
     private func configureStackView() {
@@ -81,6 +87,7 @@ class CreateContactViewController: UIViewController {
         let navigationItem = UINavigationItem(title: "New Contact")
         doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonPressed))
         navigationItem.rightBarButtonItem = doneButton
+        doneButton.isEnabled = false
         navigationBar.setItems([navigationItem], animated: false)
         
         navigationBar.translatesAutoresizingMaskIntoConstraints = false
@@ -88,11 +95,10 @@ class CreateContactViewController: UIViewController {
         navigationBar.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         navigationBar.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         
-        
     }
     
     @objc private func doneButtonPressed() {
-        
+        saveContent()
     }
     
     private func showAlert() {
@@ -101,7 +107,9 @@ class CreateContactViewController: UIViewController {
                                       preferredStyle: .actionSheet)
         let saveAction = UIAlertAction(title: "Save Contact",
                                        style: .default,
-                                       handler: nil)
+                                       handler: { [weak self] (_) in
+            self?.saveContent()
+            })
         let cancelAction = UIAlertAction(title: "Cancel",
                                          style: .cancel,
                                          handler: nil)
@@ -112,6 +120,15 @@ class CreateContactViewController: UIViewController {
         alert.addAction(cancelAction)
         alert.addAction(exitAcntion)
         present(alert, animated: true)
+    }
+    
+    private func saveContent() {
+        let contact = Contact(userId: user.userId,
+                          name: firstNameTextField.text!,
+                          surname: secondNameTextField.text!)
+        let contactRef = ref.child(contact.name.lowercased())
+        contactRef.setValue(contact.convertToDictionary())
+        dismiss(animated: true, completion: nil)
     }
 
 }
