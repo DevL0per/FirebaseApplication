@@ -12,6 +12,7 @@ import Firebase
 class ContactsViewController: UIViewController {
     
     var contactsTableView: UITableView!
+
     private var user: User!
     private var ref: DatabaseReference!
     private var contacts: [Contact] = []
@@ -22,6 +23,20 @@ class ContactsViewController: UIViewController {
         configureTableView()
         configureNavigationBar()
         createUser()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        var _contacts: [Contact] = []
+        
+        ref.observe(.value) { [weak self] (snapshot) in
+            for contact in snapshot.children {
+                _contacts.append(Contact(snapshot: contact as! DataSnapshot))
+            }
+            self?.contacts = _contacts
+            self?.contactsTableView.reloadData()
+        }
     }
     
     private func createUser() {
@@ -47,7 +62,7 @@ class ContactsViewController: UIViewController {
     private func configureNavigationBar() {
         
         title = "Contacts"
-        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.7450980544, green: 0.2126455816, blue: 0.1617561306, alpha: 1)
+        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.7450980544, green: 0.2126455816, blue: 0.1607843137, alpha: 1)
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         navigationController?.navigationBar.tintColor = .white
         
@@ -80,14 +95,21 @@ class ContactsViewController: UIViewController {
 extension ContactsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return contacts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "contactsCell", for: indexPath)
-        cell.textLabel?.text = "roma"
+        
+        cell.imageView?.image = UIImage(named: "user")
+        let name = contacts[indexPath.row].name
+        let surname = contacts[indexPath.row].surname
+        cell.textLabel?.text = "\(surname) \(name)"
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
     
 }
