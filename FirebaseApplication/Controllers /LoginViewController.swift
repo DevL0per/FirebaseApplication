@@ -142,6 +142,7 @@ class LoginViewController: UIViewController {
             textField.placeholder = "Enter e-mail"
         } else {
             textField.placeholder = "Enter password"
+            textField.isSecureTextEntry = true
         }
     }
     

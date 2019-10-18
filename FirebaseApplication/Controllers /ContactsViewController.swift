@@ -28,9 +28,8 @@ class ContactsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        var _contacts: [Contact] = []
-        
         ref.observe(.value) { [weak self] (snapshot) in
+            var _contacts: [Contact] = []
             for contact in snapshot.children {
                 _contacts.append(Contact(snapshot: contact as! DataSnapshot))
             }
@@ -110,6 +109,17 @@ extension ContactsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let contact = contacts[indexPath.row]
+            contact.reference?.removeValue()
+        }
     }
     
 }

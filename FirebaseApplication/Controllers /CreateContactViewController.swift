@@ -126,7 +126,7 @@ class CreateContactViewController: UIViewController {
         let contact = Contact(userId: user.userId,
                           name: firstNameTextField.text!,
                           surname: secondNameTextField.text!)
-        let contactRef = ref.child(contact.name.lowercased())
+        let contactRef = ref.child(String(contact.contactId))
         contactRef.setValue(contact.convertToDictionary())
         dismiss(animated: true, completion: nil)
     }
