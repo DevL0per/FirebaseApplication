@@ -11,13 +11,14 @@ import Firebase
 
 class LoginViewController: UIViewController {
     
+    var loginTextField = UITextField()
+    var passwordTextField = UITextField()
+    
     private var ref: DatabaseReference!
     
     private var mainStackView: UIStackView!
     private let minimumSynvolsInPassword = 8
     
-    private var loginTextField = UITextField()
-    private var passwordTextField = UITextField()
     private var userMessageLabel: UILabel = {
         let label = UILabel()
         label.alpha = 0
@@ -53,11 +54,26 @@ class LoginViewController: UIViewController {
         passwordTextField.text = ""
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+           view.endEditing(true)
+       }
+    
     private func loginInLastUser() {
         Auth.auth().addStateDidChangeListener { (auth, user) in
             if user != nil {
                 self.performSegue(withIdentifier: "noteSegue", sender: nil)
             }
+        }
+    }
+    
+    private func showWarningLabel(text: String) {
+        userMessageLabel.text = text
+        
+        UIView.animate(withDuration: 3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
+            [weak self] in
+            self?.userMessageLabel.alpha = 1
+        }) { [weak self] (_) in
+            self?.userMessageLabel.alpha = 0
         }
     }
     
@@ -72,16 +88,6 @@ class LoginViewController: UIViewController {
         loginButton.addTarget(self, action: #selector(loginButtonTarget), for: .touchUpInside)
     }
     
-    func showWarningLabel(text: String) {
-        userMessageLabel.text = text
-        
-        UIView.animate(withDuration: 3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
-            [weak self] in
-            self?.userMessageLabel.alpha = 1
-        }) { [weak self] (_) in
-            self?.userMessageLabel.alpha = 0
-        }
-    }
     
     @objc private func loginButtonTarget() {
         guard let email = loginTextField.text, let password = passwordTextField.text,
@@ -90,14 +96,15 @@ class LoginViewController: UIViewController {
                 return
         }
         
-        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+        Auth.auth().signIn(withEmail: email, password: password) {[weak self] (user, error) in
             if error != nil {
-                self.showWarningLabel(text: "authorization error")
+                self?.showWarningLabel(text: "authorization error")
+                return
             } else if user != nil {
-                self.performSegue(withIdentifier: "noteSegue", sender: nil)
+                self?.performSegue(withIdentifier: "noteSegue", sender: nil)
                 return
             }
-            self.showWarningLabel(text: "User doesn't exist")
+            self?.showWarningLabel(text: "User doesn't exist")
         }
     }
     
@@ -134,18 +141,19 @@ class LoginViewController: UIViewController {
         textField.layer.cornerRadius = 3
         textField.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.937254902, alpha: 1)
         textField.leftViewMode = .always
+        textField.delegate = self
         
         let lefrview = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
         textField.leftView = lefrview
         
         if textField == loginTextField {
             textField.placeholder = "Enter e-mail"
+            textField.returnKeyType = .next
         } else {
             textField.placeholder = "Enter password"
             textField.isSecureTextEntry = true
         }
     }
-    
     
     //MARK: - Set Constraints
     private func configureStackView() {

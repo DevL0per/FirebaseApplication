@@ -44,6 +44,27 @@ class ContactsViewController: UIViewController {
         ref = Database.database().reference(withPath: "users").child(user.userId).child("contacts")
     }
     
+    @objc private func signOut() {
+        do {
+            try Auth.auth().signOut()
+        } catch let error {
+            print(error)
+        }
+         dismiss(animated: true, completion: nil)
+    }
+    
+    @objc private func addButtonPressed() {
+        performSegue(withIdentifier: "addContact", sender: nil)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination as! CreateContactViewController
+        vc.user = user
+        vc.ref = ref
+    }
+    
+    //MARK: - configures
+    
     private func configureTableView() {
         contactsTableView = UITableView()
         view.addSubview(contactsTableView)
@@ -67,25 +88,6 @@ class ContactsViewController: UIViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonPressed))
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "sign out", style: .plain, target: self, action: #selector(signOut))
-    }
-    
-    @objc private func signOut() {
-        do {
-            try Auth.auth().signOut()
-        } catch let error {
-            print(error)
-        }
-         dismiss(animated: true, completion: nil)
-    }
-    
-    @objc private func addButtonPressed() {
-        performSegue(withIdentifier: "addContact", sender: nil)
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let vc = segue.destination as! CreateContactViewController
-        vc.user = user
-        vc.ref = ref
     }
     
 }

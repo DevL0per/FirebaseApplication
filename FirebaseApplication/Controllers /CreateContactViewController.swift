@@ -34,12 +34,55 @@ class CreateContactViewController: UIViewController {
         
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
     @objc private func checkTextFields() {
         guard let name = firstNameTextField.text, let surname = secondNameTextField.text
             else { return }
         isModalInPresentation = (!name.isEmpty && !surname.isEmpty) ? true : false
         doneButton.isEnabled = (!name.isEmpty && !surname.isEmpty) ? true : false
     }
+    
+    @objc private func doneButtonPressed() {
+        saveContent()
+    }
+    
+    private func showAlert() {
+        let alert = UIAlertController(title: "Choose what to do",
+                                      message: nil,
+                                      preferredStyle: .actionSheet)
+        let saveAction = UIAlertAction(title: "Save Contact",
+                                       style: .default,
+                                       handler: { [weak self] (_) in
+            self?.saveContent()
+            })
+        let cancelAction = UIAlertAction(title: "Cancel",
+                                         style: .cancel,
+                                         handler: nil)
+        let exitAcntion = UIAlertAction(title: "Exit without saving",
+                                        style: .destructive,
+                                        handler: { [weak self] (_) in
+          self?.dismiss(animated: true, completion: nil)
+        })
+        alert.addAction(saveAction)
+        alert.addAction(cancelAction)
+        alert.addAction(exitAcntion)
+        present(alert, animated: true)
+    }
+    
+    private func saveContent() {
+        let contact = Contact(userId: user.userId,
+                          name: firstNameTextField.text!,
+                          surname: secondNameTextField.text!)
+        let contactRef = ref.child(String(contact.contactId))
+        contactRef.setValue(contact.convertToDictionary())
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    //MARK - configures
     
     private func configureStackView() {
         
@@ -61,9 +104,6 @@ class CreateContactViewController: UIViewController {
         configureTextField(textField: firstNameTextField)
         configureTextField(textField: secondNameTextField)
         
-        firstNameTextField.placeholder = "first name"
-        secondNameTextField.placeholder = "second name"
-        
     }
     
     private func configureTextField(textField: UITextField) {
@@ -74,10 +114,18 @@ class CreateContactViewController: UIViewController {
         textField.leftAnchor.constraint(equalTo: stackView.leftAnchor).isActive = true
         textField.rightAnchor.constraint(equalTo: stackView.rightAnchor).isActive = true
         textField.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        textField.delegate = self
         
         let spaceView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
         textField.leftViewMode = .always
         textField.leftView = spaceView
+        
+        if textField == firstNameTextField {
+            textField.placeholder = "first name"
+            textField.returnKeyType = .next
+        } else {
+            textField.placeholder = "second name"
+        }
         
     }
     
@@ -97,44 +145,21 @@ class CreateContactViewController: UIViewController {
         
     }
     
-    @objc private func doneButtonPressed() {
-        saveContent()
-    }
-    
-    private func showAlert() {
-        let alert = UIAlertController(title: "Choose what to do",
-                                      message: nil,
-                                      preferredStyle: .actionSheet)
-        let saveAction = UIAlertAction(title: "Save Contact",
-                                       style: .default,
-                                       handler: { [weak self] (_) in
-            self?.saveContent()
-            })
-        let cancelAction = UIAlertAction(title: "Cancel",
-                                         style: .cancel,
-                                         handler: nil)
-        let exitAcntion = UIAlertAction(title: "Exit without saving",
-                                        style: .destructive,
-                                        handler: nil)
-        alert.addAction(saveAction)
-        alert.addAction(cancelAction)
-        alert.addAction(exitAcntion)
-        present(alert, animated: true)
-    }
-    
-    private func saveContent() {
-        let contact = Contact(userId: user.userId,
-                          name: firstNameTextField.text!,
-                          surname: secondNameTextField.text!)
-        let contactRef = ref.child(String(contact.contactId))
-        contactRef.setValue(contact.convertToDictionary())
-        dismiss(animated: true, completion: nil)
-    }
-
 }
 
 extension CreateContactViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
         showAlert()
+    }
+}
+
+
+extension CreateContactViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        if textField == firstNameTextField {
+            secondNameTextField.becomeFirstResponder()
+        }
+        return true
     }
 }

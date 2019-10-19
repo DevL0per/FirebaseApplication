@@ -12,6 +12,7 @@
 		F62EF3532357A990002F3FC6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62EF3522357A990002F3FC6 /* LoginViewController.swift */; };
 		F62EF35523586126002F3FC6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62EF35423586126002F3FC6 /* User.swift */; };
 		F62EF358235861AD002F3FC6 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62EF357235861AD002F3FC6 /* Contact.swift */; };
+		F62EF35D235AFDB4002F3FC6 /* Extension+LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62EF35C235AFDB4002F3FC6 /* Extension+LoginViewController.swift */; };
 		F648043B2354D85D00F9678B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F648043A2354D85D00F9678B /* AppDelegate.swift */; };
 		F648043D2354D85D00F9678B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F648043C2354D85D00F9678B /* SceneDelegate.swift */; };
 		F64804422354D85D00F9678B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F64804402354D85D00F9678B /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 		F62EF3522357A990002F3FC6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F62EF35423586126002F3FC6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F62EF357235861AD002F3FC6 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		F62EF35C235AFDB4002F3FC6 /* Extension+LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+LoginViewController.swift"; sourceTree = "<group>"; };
 		F64804372354D85D00F9678B /* FirebaseApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirebaseApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F648043A2354D85D00F9678B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F648043C2354D85D00F9678B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,7 +76,7 @@
 			children = (
 				F64804522354E44F00F9678B /* ContactsViewController.swift */,
 				F64804542354E6A900F9678B /* CreateContactViewController.swift */,
-				F62EF3522357A990002F3FC6 /* LoginViewController.swift */,
+				F62EF35B235AFD66002F3FC6 /* LogibViewController */,
 			);
 			path = "Controllers ";
 			sourceTree = "<group>";
@@ -100,6 +102,15 @@
 				F62EF357235861AD002F3FC6 /* Contact.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		F62EF35B235AFD66002F3FC6 /* LogibViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F62EF3522357A990002F3FC6 /* LoginViewController.swift */,
+				F62EF35C235AFDB4002F3FC6 /* Extension+LoginViewController.swift */,
+			);
+			path = LogibViewController;
 			sourceTree = "<group>";
 		};
 		F648042E2354D85D00F9678B = {
@@ -252,6 +263,7 @@
 				F64804552354E6A900F9678B /* CreateContactViewController.swift in Sources */,
 				F648043B2354D85D00F9678B /* AppDelegate.swift in Sources */,
 				F648043D2354D85D00F9678B /* SceneDelegate.swift in Sources */,
+				F62EF35D235AFDB4002F3FC6 /* Extension+LoginViewController.swift in Sources */,
 				F62EF358235861AD002F3FC6 /* Contact.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
